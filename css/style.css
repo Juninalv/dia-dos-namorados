@@ -30,7 +30,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 10;
 }
 
 .header-left {
@@ -95,10 +94,6 @@ body {
   transform: scale(1.1);
 
   color: #d1d1d1;
-}
-
-.header-right span:hover {
-  transform: scale(1.1);
 }
 
 .hero {
@@ -359,10 +354,7 @@ body {
   border-radius: 50%;
   cursor: pointer;
   transition: 0.2s;
-}
-
-.controls button:hover {
-  transform: scale(1.1);
+  font-family: Arial, sans-serif;
 }
 
 .time {
@@ -373,6 +365,17 @@ body {
 #progress {
   width: 100%;
   accent-color: var(--red-primary);
+}
+
+.music-title {
+  font-family: var(--font-title);
+  font-weight: 700;
+}
+
+.music-artist {
+  font-family: var(--font-title);
+  font-weight: 400;
+  color: var(--text-secondary);
 }
 
 @media (max-width: 768px) {
@@ -456,23 +459,9 @@ body {
     display: none;
   }
 
-  .controls button:hover {
-    transform: none;
-  }
-
   .controls button {
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
-  }
-
-  .controls button {
-    transition: none;
-    transform: none;
-  }
-
-  @media (hover: hover) {
-    .controls button:hover {
-      transform: scale(1.1);
-    }
+    font-family: Arial, sans-serif;
   }
 }
