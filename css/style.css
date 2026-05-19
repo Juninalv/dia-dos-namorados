@@ -320,6 +320,60 @@ body {
   font-size: 1.2rem;
 }
 
+.music-player {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  width: 260px;
+
+  background: rgba(20, 20, 20, 0.9);
+  backdrop-filter: blur(10px);
+
+  border-radius: 14px;
+  padding: 12px;
+
+  color: white;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.controls button {
+  background: var(--red-primary);
+  border: none;
+  color: white;
+
+  width: 36px;
+  height: 36px;
+
+  border-radius: 50%;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.controls button:hover {
+  transform: scale(1.1);
+}
+
+.time {
+  font-size: 0.75rem;
+  color: #ccc;
+}
+
+#progress {
+  width: 100%;
+  accent-color: var(--red-primary);
+}
+
 @media (max-width: 768px) {
   .main-header {
     padding: 0 20px;

@@ -150,5 +150,83 @@
         >
       </section>
     </main>
+    <div class="music-player">
+      <audio id="bg-music">
+        <source src="music/pra-sempre-com-vc.mp3" type="audio/mpeg" />
+      </audio>
+
+      <div class="music-info">
+        <span class="music-title">Pra Sempre Com Você</span>
+        <span class="music-artist">Jorge & Mateus</span>
+      </div>
+
+      <div class="controls">
+        <button id="playBtn">▶</button>
+        <button id="restartBtn">⟲</button>
+
+        <div class="time">
+          <span id="current">0:00</span>
+          <span id="duration">3:20</span>
+        </div>
+      </div>
+
+      <input type="range" id="progress" value="0" min="0" max="100" />
+    </div>
+
+    <script>
+      const audio = document.getElementById("bg-music");
+      const playBtn = document.getElementById("playBtn");
+      const restartBtn = document.getElementById("restartBtn");
+
+      const current = document.getElementById("current");
+      const duration = document.getElementById("duration");
+      const progress = document.getElementById("progress");
+
+      let isPlaying = false;
+
+      // Play / Pause
+      playBtn.addEventListener("click", () => {
+        if (!isPlaying) {
+          audio.play();
+          playBtn.textContent = "⏸";
+        } else {
+          audio.pause();
+          playBtn.textContent = "▶";
+        }
+        isPlaying = !isPlaying;
+      });
+
+      // Restart
+      restartBtn.addEventListener("click", () => {
+        audio.currentTime = 0;
+        audio.play();
+        playBtn.textContent = "⏸";
+        isPlaying = true;
+      });
+
+      // Tempo total
+      audio.addEventListener("loadedmetadata", () => {
+        duration.textContent = formatTime(audio.duration);
+      });
+
+      // Atualiza tempo + barra
+      audio.addEventListener("timeupdate", () => {
+        current.textContent = formatTime(audio.currentTime);
+
+        progress.value = (audio.currentTime / audio.duration) * 100;
+      });
+
+      // Arrastar barra
+      progress.addEventListener("input", () => {
+        audio.currentTime = (progress.value / 100) * audio.duration;
+      });
+
+      // Formato mm:ss
+      function formatTime(time) {
+        const min = Math.floor(time / 60);
+        const sec = Math.floor(time % 60);
+        return `${min}:${sec < 10 ? "0" : ""}${sec}`;
+      }
+    </script>
   </body>
 </html>
