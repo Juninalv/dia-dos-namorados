@@ -441,6 +441,18 @@ body {
 
   .final-message span {
     padding: 0px 60px 50px;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .music-player {
+    width: calc(100% - 40px);
+    left: 20px;
+    right: 20px;
+    bottom: 10px;
+    border-radius: 16px;
+  }
+
+  #progress {
+    display: none;
   }
 }
