@@ -469,4 +469,10 @@ body {
     transition: none;
     transform: none;
   }
+
+  @media (hover: hover) {
+    .controls button:hover {
+      transform: scale(1.1);
+    }
+  }
 }
