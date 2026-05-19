@@ -435,7 +435,7 @@ body {
   }
 
   .final-message h2 {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     max-width: 800px;
   }
 
@@ -454,5 +454,19 @@ body {
 
   #progress {
     display: none;
+  }
+
+  .controls button:hover {
+    transform: none;
+  }
+
+  .controls button {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .controls button {
+    transition: none;
+    transform: none;
   }
 }
