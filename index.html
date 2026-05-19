@@ -192,7 +192,7 @@
       playBtn.addEventListener("click", () => {
         if (!isPlaying) {
           audio.play();
-          playBtn.textContent = "⏸";
+          playBtn.textContent = "❚❚";
         } else {
           audio.pause();
           playBtn.textContent = "▶";
@@ -204,7 +204,7 @@
       restartBtn.addEventListener("click", () => {
         audio.currentTime = 0;
         audio.play();
-        playBtn.textContent = "⏸";
+        playBtn.textContent = "❚❚";
         isPlaying = true;
       });
 
