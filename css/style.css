@@ -30,6 +30,17 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.main-header.scrolled {
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .header-left {
@@ -40,14 +51,9 @@ body {
 
 .logo {
   color: #e50914;
-
   font-size: 2.8rem;
-
   font-family: "Bebas Neue", sans-serif;
-
-  letter-spacing: 2px;
-
-  cursor: pointer;
+  letter-spacing: 4px;
 }
 
 .main-nav {
@@ -58,11 +64,8 @@ body {
 
 .main-nav a {
   color: white;
-
   text-decoration: none;
-
   font-size: 0.95rem;
-
   transition: 0.3s;
 }
 
@@ -74,19 +77,14 @@ body {
   display: flex;
   align-items: center;
   gap: 20px;
-
   font-size: 1.3rem;
-
   cursor: pointer;
 }
 
 .header-right i {
   color: white;
-
   font-size: 1.2rem;
-
   cursor: pointer;
-
   transition: 0.3s;
 }
 
@@ -99,9 +97,9 @@ body {
 .hero {
   width: 100%;
   height: 86vh;
-  background-image: url("../img/hero-img.jpeg");
+  background-image: url("../img/hero.jpeg");
   background-size: cover;
-  background-position: center;
+  background-position: 0 30%;
   position: relative;
   display: flex;
   align-items: center;
@@ -111,20 +109,39 @@ body {
 .hero-overlay {
   width: 100%;
   height: 100%;
-
-  background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.95),
-    rgba(0, 0, 0, 0.5)
-  );
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
   position: absolute;
   inset: 0;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(to top, #000, transparent);
+  z-index: 1;
 }
 
 .hero-content {
   max-width: 700px;
   position: relative;
   z-index: 2;
+  animation: fadeUp 3s ease;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero-tag {
@@ -150,6 +167,17 @@ body {
   margin-top: 10px;
 }
 
+.contador-amor {
+  text-align: center;
+  padding: 20px;
+  color: red;
+  font-family: var(--font-title);
+}
+
+#tempo-juntos {
+  font-size: 1.9rem;
+  font-weight: bold;
+}
 .date {
   margin-top: 20px;
   color: #999;
@@ -280,7 +308,7 @@ body {
   display: flex;
   gap: 20px;
   width: max-content;
-  animation: scroll 25s linear infinite;
+  animation: scroll 40s linear infinite;
 }
 
 .gallery-track img {
@@ -378,10 +406,75 @@ body {
   color: var(--text-secondary);
 }
 
+.gallery-track img {
+  cursor: pointer;
+}
+
+.seta {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 50px;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+  padding: 10px;
+  transition: 0.2s;
+}
+
+.seta:hover {
+  color: #ccc;
+}
+
+.esquerda {
+  left: 20px;
+}
+
+.direita {
+  right: 20px;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+  z-index: 9999;
+}
+
+.lightbox.ativo {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-img {
+  max-width: 90%;
+  max-height: 90vh;
+  border-radius: 10px;
+}
+
+.lightbox-fechar {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #fff;
+  font-size: 40px;
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
   .main-header {
     padding: 0 20px;
     height: 70px;
+  }
+
+  .logo {
+    font-size: 2.2rem;
   }
 
   .main-nav {
@@ -389,79 +482,150 @@ body {
   }
 
   .hero {
-    padding: 0 20px;
-    background-image: url(../img/hero-mobile.jpeg);
-    height: 70vh;
+    height: auto;
+    min-height: 85vh;
+    padding: 30px 20px 60px;
+    align-items: flex-start;
+    background-position: center;
+  }
+
+  .hero-content {
+    max-width: 100%;
+    margin-top: 20px;
+  }
+
+  .hero-tag {
+    font-size: 0.8rem;
+    letter-spacing: 2px;
   }
 
   .hero-content h1 {
-    font-size: 3.5rem;
-    line-height: 60px;
+    font-size: 4rem;
+    line-height: 0.95;
+    margin-top: 10px;
   }
 
   .hero-content h2 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
+  }
+
+  .date {
+    font-size: 1rem;
+  }
+
+  .description {
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-top: 15px;
   }
 
   .hero-buttons {
     flex-direction: column;
-    gap: 12px;
+    margin-top: 30px;
   }
 
   .btn-primary,
   .btn-secondary {
     width: 100%;
+  }
+
+  .counter {
+    padding: 80px 20px;
     text-align: center;
   }
 
+  .contador-amor {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  #texto-digitado {
+    font-family: var(--font-title);
+    font-size: 2.4rem;
+    color: white;
+    line-height: 1.5;
+    min-height: 80px;
+  }
+
+  #texto-digitado::after {
+    content: "|";
+    color: var(--red-primary);
+    animation: piscar 0.8s infinite;
+  }
+
+  .contador-subtitulo {
+    display: block;
+    margin-top: 20px;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+  }
+
+  @keyframes piscar {
+    50% {
+      opacity: 0;
+    }
+  }
+
   .episodes {
-    padding: 0 0 80px 20px;
-  }
-
-  .section-title {
-    font-size: 1.6rem;
-    margin-bottom: 25px;
-  }
-
-  .episodes-container {
-    justify-content: flex-start;
-    gap: 16px;
-    padding-right: 20px;
+    padding: 0 20px 80px;
   }
 
   .episode-card {
-    min-width: 260px;
+    min-width: 250px;
+  }
+
+  .gallery-track {
+    animation: scroll 80s linear infinite;
+  }
+
+  .gallery-track img {
+    width: 220px;
+    height: 320px;
   }
 
   .final-message {
-    padding: 0px 34px 120px;
+    padding: 40px 25px 140px;
   }
 
   .final-message h2 {
-    font-size: 1.2rem;
-    max-width: 800px;
+    font-size: 2rem;
+    line-height: 1.3;
   }
 
   .final-message span {
-    padding: 0px 60px 50px;
-    font-size: 0.9rem;
+    padding: 0;
+    font-size: 1rem;
+    line-height: 1.8;
   }
 
   .music-player {
-    width: calc(100% - 40px);
-    left: 20px;
-    right: 20px;
+    width: calc(100% - 20px);
+    left: 10px;
+    right: 10px;
     bottom: 10px;
-    border-radius: 16px;
+  }
+
+  .music-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .music-title {
+    font-size: 1rem;
+  }
+
+  .music-artist {
+    font-size: 0.9rem;
   }
 
   #progress {
-    display: none;
+    display: block;
+  }
+  #texto-digitado {
+    font-size: 1.8rem;
   }
 
-  .controls button {
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-    font-family: Arial, sans-serif;
+  .contador-subtitulo {
+    font-size: 1rem;
   }
 }
